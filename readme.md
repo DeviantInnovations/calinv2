@@ -1,25 +1,34 @@
-## Laravel PHP Framework
+## CAL Inventory System
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+CAL Inventory System is a project for CAL Colossal Creations Inc. for their fabric inventory management. The system have two users and have access to the stated features below:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+*The Admin
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+- User Management
+  Allows the activation, deactivation and editing of user accounts.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+- Fabric Inventory Management
+  Provides Adding, editing and deleting of fabrics along with an add and delete function for each rolls in a fabric.
 
-## Official Documentation
+- Fabric Browsing
+  A searching tool to locate a fabric faster, utilizing the fabric code and details for searching.
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+- Credit Transaction
+  Allows adding of rolls to a certain fabric under a recorded condition.
 
-### Contributing To Laravel
+- Debit Transaction
+  Allows debiting of a roll.
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
+- Transactions View
+  Shows all debit and credit transactions for auditing.
 
-### License
+*The Inputter
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+- Fabric Browsing
+  A searching tool to locate a fabric faster, utilizing the fabric code and details for searching.
+
+- Credit Transaction
+  Allows adding of rolls to a certain fabric.
+
+- Debit Transaction
+  Allows debiting of a roll.
