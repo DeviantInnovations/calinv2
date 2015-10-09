@@ -135,6 +135,13 @@
                       </a>
                    
                   </li>
+                  <li class="sub-menu">
+                      <a href="/admin/developertools" @if(Session::get('developertools')==1) {{Session::forget('developertools')}} class= "active" @endif >
+                          <i class="fa fa-th"></i>
+                          <span>Developer Tools</span>
+                      </a>
+                   
+                  </li>
                  
                   @endif
               </ul>
