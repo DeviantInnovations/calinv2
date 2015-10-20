@@ -194,7 +194,7 @@ public function delete($id)
     else 
     {
 
-      if(Input::get('yards')<5){
+      if(Input::get('yards')<1){
         Session::put('msgfail', 'Failed to credit roll. Yards cannot be less than the minimum amount.');
         return Redirect::back()->withInput();
       }
@@ -257,7 +257,7 @@ public function delete($id)
       $transaction->type = "DEBIT";
       $transaction->save();
 
-      if($newyards<5)
+      if($newyards<1)
       {
         Roll::where('code', strip_tags(Input::get('code')))->delete();
       }
