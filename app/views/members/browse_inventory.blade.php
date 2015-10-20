@@ -127,6 +127,7 @@
                 <div align="center">
                         <a href="{{asset('uploads/fabric/'.$fabric->file)}}" data-lightbox="{{$fabric->code}}" title="{{$fabric->code}}">
                         <img class="img-thumbnail" src="{{asset('uploads/fabric/'.$fabric->file)}}" style="width: 80px; height: 80px;" />
+                    </a>
                     </div>
                     <br>
     <div class="table-responsive">

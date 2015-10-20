@@ -263,7 +263,7 @@ public function delete($id)
       }
       else
       {
-        $roll->yards = strip_tags(Input::get('yards'));
+        $roll->yards = $newyards; 
         $roll->save();
       }
 
