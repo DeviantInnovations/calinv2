@@ -16,7 +16,7 @@ class CreateRollsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('fabric_id');
-			$table->decimal('yards',5,3);
+			$table->decimal('yards',8,3);
 			$table->string('code');
 			$table->timestamps();
 		});

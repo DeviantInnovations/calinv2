@@ -18,7 +18,7 @@ class CreateTransactionsTable extends Migration {
 			$table->string('roll_code');
 			$table->string('fabric_code');
 			$table->string('type');
-			$table->decimal('change', 5, 3);
+			$table->decimal('change', 8, 3);
 			$table->integer('user_id');
 			$table->timestamps();
 		});
