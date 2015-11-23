@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRollsTable extends Migration {
+class CreateReportsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,15 @@ class CreateRollsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('rolls', function(Blueprint $table)
+		Schema::create('reports', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('fabric_id');
-			$table->decimal('yards',9,3);
-			$table->string('code');
+			$table->string('fabric_code');
+			$table->string('type');
+			$table->decimal('credit', 9, 3);
+			$table->decimal('debit', 9, 3);
+			$table->string('month');
+			$table->string('year');
 			$table->timestamps();
 		});
 
@@ -30,6 +33,7 @@ class CreateRollsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('rolls');
+		Schema::drop('reports');
 	}
+
 }

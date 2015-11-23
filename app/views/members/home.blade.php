@@ -94,6 +94,53 @@ CAL Inventory
    
         </div>
     </div>
+
+    <div class="row">
+        {{ Form::open(array('class' => 'form-signin', 'role' => 'form', 'action' => 'reports' )) }}
+   
+
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" align='center'>
+                    Report Generator
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12" align="center">
+         <div class="form-group @if ($errors->has('type')) has-error @endif">
+                <label>Type</label>
+                {{Form::select('type', array('DEBIT' => 'Debit', 'CREDIT' => 'Credit'));}}
+       
+            @if ($errors->has('type')) 
+                <p class="help-block">{{ $errors->first('type') }}</p>  
+            @endif
+
+        </div>
+      
+        <div class="form-group @if ($errors->has('month')) has-error @endif">
+                <label>Month</label>
+                {{ Form::selectMonth('month') }}
+       
+            @if ($errors->has('month')) 
+                <p class="help-block">{{ $errors->first('month') }}</p>  
+            @endif
+
+        </div>
+       <div class="form-group @if ($errors->has('year')) has-error @endif">
+                <label>Year</label>
+                {{ Form::selectYear('year', 2015, date("Y")) }}
+       
+            @if ($errors->has('year')) 
+                <p class="help-block">{{ $errors->first('year') }}</p>  
+            @endif
+
+        </div>
+
+        <div class="col-lg-12" align="center">
+            <input type="submit" class="btn btn-success left-sbs sbmt" value="Generate"> 
+        </div>
+        {{ Form::close(); }}
+    </div>
    
 @stop
 

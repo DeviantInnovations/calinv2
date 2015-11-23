@@ -37,8 +37,8 @@ class FabricController extends BaseController {
       }
 
         $fabric_save= new Fabric;
-        $fabric_save->code=strip_tags(Input::get('code'));;
-        $fabric_save->details=strip_tags(Input::get('details'));;
+        $fabric_save->code=strip_tags(Input::get('code'));
+        $fabric_save->details=strip_tags(Input::get('details'));
         $fabric_save->file=$filename;
         $fabric_save->save();
     
@@ -88,8 +88,8 @@ class FabricController extends BaseController {
           $uploadSuccess   = $file->move($destinationPath, $filename);
       }
         
-        $fabric_save->code=strip_tags(Input::get('code'));;
-        $fabric_save->details=strip_tags(Input::get('details'));;
+        $fabric_save->code=strip_tags(Input::get('code'));
+        $fabric_save->details=strip_tags(Input::get('details'));
         $fabric_save->file=$filename;
         $fabric_save->save();
     
@@ -210,7 +210,7 @@ public function delete($id)
       $transaction->user_id = Auth::user()->id;
       $transaction->fabric_code = strip_tags(Input::get('fabric'));
       $transaction->roll_code = strip_tags(Input::get('code'));
-      $transaction->change = strip_tags(Input::get('yards'));
+      $transaction->change = Input::get('yards');
       $transaction->type = "CREDIT";
       $transaction->save();
 
@@ -253,13 +253,13 @@ public function delete($id)
       $transaction->user_id = Auth::user()->id;
       $transaction->fabric_code = $fabric->code;
       $transaction->roll_code = strip_tags(Input::get('code'));
-      $transaction->change = strip_tags(Input::get('yards'));
+      $transaction->change = Input::get('yards');
       $transaction->type = "DEBIT";
       $transaction->save();
 
       if($newyards<1)
       {
-        Roll::where('code', strip_tags(Input::get('code')))->delete();
+        //Roll::where('code', strip_tags(Input::get('code')))->delete();
       }
       else
       {
@@ -271,6 +271,62 @@ public function delete($id)
 
       Session::put('msgsuccess', 'Successfully debited roll.');
       return Redirect::back();
+
+    }
+  }
+
+  //
+  public function reports()
+  {
+    $rules = array(
+      'month'    => 'required', 
+      'year' => 'required',
+      'type' => 'required'
+    );
+    $validator = Validator::make(Input::all(), $rules);
+
+    if ($validator->fails()) 
+    {
+      Session::put('msgfail', 'Invalid input.');
+      return Redirect::back()
+        ->withErrors($validator)
+        ->withInput(); 
+    } 
+    else 
+    {
+   
+       
+        Report::whereYear('created_at', '=', Input::get('year'))
+              ->whereMonth('created_at', '=', Input::get('month'))
+              ->delete();
+
+        $fabrics = Fabric::get();
+
+        foreach ($fabrics as $fabric) {
+        $report_save= new Report;
+        $report_save->fabric_code = $fabric->code;
+        $report_save->month = Input::get('year');
+        $report_save->year = Input::get('month');
+        $report_save->debit=  Transaction::where('type', 'DEBIT')->where('fabric_code', $fabric->code)->whereYear('created_at', '=', Input::get('year'))
+              ->whereMonth('created_at', '=', Input::get('month'))
+              ->sum('change');
+        $report_save->credit= Transaction::where('type', 'CREDIT')->where('fabric_code', $fabric->code)->whereYear('created_at', '=', Input::get('year'))
+              ->whereMonth('created_at', '=', Input::get('month'))
+              ->sum('change');
+        $report_save->save();
+        }
+      
+      if(Input::get('type')=="DEBIT")
+        $reports =  DB::table('reports')->whereYear('created_at', '=', Input::get('year'))
+              ->whereMonth('created_at', '=', Input::get('month'))->orderBy('debit')->paginate(10);
+      else
+          $reports =  DB::table('reports')->whereYear('created_at', '=', Input::get('year'))
+              ->whereMonth('created_at', '=', Input::get('month'))->orderBy('credit')->paginate(10);
+     
+    return View::make('members.reports')->with('reports', $reports)->with('type', Input::get('type'));
+  
+
+  
 
     }
   }

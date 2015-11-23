@@ -36,6 +36,7 @@ Route::get('/home', function()
 		return View::make('members.home')->with('user', $user)->with('transactions', $transactions);
 	}
 });
+Route::post('home', array('uses' => 'FabricController@reports', 'as'=>'reports'));
 
 
 Route::get('/register', function()
